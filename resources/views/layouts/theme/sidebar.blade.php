@@ -2,17 +2,18 @@
 
       <nav id="sidebar">
 
-          <div class="navbar-nav theme-brand flex-row  text-center">
-              <div class="nav-logo">
-                  <div class="nav-item theme-logo">
-                      <a href="#">
-                          <img src="{{asset('img/cash.svg')}}"  alt="logo">
+          <div class="navbar-nav theme-brand flex-column  text-center">
+              <div class="nav-logo justify-content-center bg-secondary p-2">
+                  <div class="nav-item  flex text-center">
+                      <a href="route('customers')" class=" flex-row text-center">
+                          <img src="{{asset('img/logo2.svg')}}"  alt="logo" width="100px">
                       </a>
                   </div>
-                  <div class="nav-item theme-text">
-                      <a href="#" class="nav-link "> APP</a>
-                  </div>
+                  
               </div>
+              <div class="">
+                <a href="#" class="nav-link "> INVERSIONES DEL SUR</a>
+            </div>
               <div class="nav-item sidebar-toggle">
                   <div class="btn-toggle sidebarCollapse">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-left">
