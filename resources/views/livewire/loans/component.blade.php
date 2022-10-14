@@ -60,9 +60,17 @@
                             TIPO DE PAGO
                             <select wire:model="frecuency_id" class="form-select form-select-sm">
                                 <option value="0" selected disabled>SELECCIONE</option>
-                                @foreach($frecuencies as $frecuency)
+                                <option value="1">Diario</option>
+                                <option value="2">Semanal</option>
+                                <option value="3">Quincenal</option>
+                                <option value="4">Mensual</option>
+
+
+
+
+                                {{-- @foreach($frecuencies as $frecuency)
                                 <option value="{{ $frecuency->id }}">{{ $frecuency->name }}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div> 
                         <div class="col-sm-12 col-md-2">
