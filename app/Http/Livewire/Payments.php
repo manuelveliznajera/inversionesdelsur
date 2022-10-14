@@ -49,13 +49,15 @@ class Payments extends Component
         //dd($this->plan[0]->loan_id);
         sleep(2);
 //dd($this->amount);
+        $interes=$this->amount/3;
+        $capital=$interes*2;
         $payment = Payment::Create(
             [
                 'user_id' =>Auth()->user()->id,
                 'loan_id' => $this->plan[0]->loan_id,
                 'amount' => floatval($this->amount),
-                'interest' => floatval($this->amount/3),
-                'amort' =>floatval($this->amount),
+                'interest' => floatval($interes),
+                'amort' =>floatval($capital),
                 'type' => 'ONTIME'
             ]
         );
