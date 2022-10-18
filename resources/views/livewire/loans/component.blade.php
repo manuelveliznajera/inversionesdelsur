@@ -73,14 +73,14 @@
                                 @endforeach --}}
                             </select>
                         </div> 
-                        <div class="col-sm-12 col-md-2">
+                        {{-- <div class="col-sm-12 col-md-2">
                             METODO DE PAGO
                             <select wire:model="method" class="form-select form-select-sm">
                                 <option value="Diario">Método Diario</option>
                                 <option value="Quincenal">Método Quincenal</option>
                                 <option value="Mensual">Método Mensual</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="table-responsive mt-4">
                         {{$statusComponent}}

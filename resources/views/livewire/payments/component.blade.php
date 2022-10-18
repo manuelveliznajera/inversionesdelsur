@@ -4,20 +4,24 @@
         <div class="col-lg-12 layout-spacing layout-top-spacing">
             <div class="statbox widget box box-shadow">
                 <div class="widget-header">
-                    <div class="row">
+                    
+                </div>
+                <div class="widget-content widget-content-area">
+                    <div class="d-flex justify-content-between ">
                         <div class="col-sm-12 col-md-10">
                             <h4><b>  PRESTAMO A NOMBRE DE: {{ $loans[0]->customer->name }}  </b>
                             </h4>
                             <h5><b>  PRESTAMO NUMERO: 0000{{ $loans[0]->id }}  </b>
                             </h5>
                         </div>
-
+                        <div class="col-sm-12 col-md-12 col-lg-12 mr-5 p-3">
+                            <h1 class="badge badge-light-success">  TOTAL DE PRESTAMO: Q{{ $loans[0]->amount }}  
+                            </h1>
+                           
+                        </div>
                        
 
                     </div>
-                </div>
-                <div class="widget-content widget-content-area">
-                   
                    
                     <div class="table-responsive mt-4">
                         {{$statusComponent}}

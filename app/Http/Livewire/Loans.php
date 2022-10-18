@@ -88,7 +88,7 @@ class Loans extends Component
                 $this->plan=$this->PlanSemanal($this->amount);
             }
             foreach ($this->plan as $key => $pay) {
-                if ($key > 0) {
+             //   if ($key > 0) {
                     Plan::create([
                         'loan_id' => $loan->id,
                         'date' => $pay['FECHA'],
@@ -98,7 +98,7 @@ class Loans extends Component
                         'amort' => $pay['AMORTIZACION'],
                         'balance' => $pay['PENDIENTE']
                     ]);
-                }
+              //  }
             }
             //public $customer_id = 0, $amount = 0, $rate = 0, $rate_id = 0, $years = 1, $frecuency_id = 0, $method = 'Frances', $plan = [];
 

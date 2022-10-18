@@ -85,44 +85,50 @@ trait TraitFrances
     public function PlanDiario( $cantidad)
     {
         $prestamo = intval($cantidad);
-       // $porcentaje = $interes*10;
         $porcentajeSum=$cantidad/2;
         $dias = 100;
-        $cuota = ($prestamo+$porcentajeSum)/100;
+        $cuotaDiaria = ($prestamo+$porcentajeSum)/100;
+        $pagointeres=$cuotaDiaria/3;
         $tabla = collect();
-        //dd($cuota);
-
-        //variables dinámicas
-      //  $INTERESES = 0;
-        $TINTERESES = 0;
-        $AMORTIZACION = 0;
-        $TAMORTIZACION = 0;
+        $PENDIENTE = $prestamo+$porcentajeSum;
+        $INTERESES = $porcentajeSum;
+        $AMORTIZACION = $prestamo;
         $TCUOTAS = 0;
-        $PENDIENTE = $prestamo;
 
-        for ($i = 1; $i <= $dias; $i++) {
-          //  $INTERESES = $cuota/3;
-            $TINTERESES += $cuota*$dias;
-            $AMORTIZACION = round($cuota - $prestamo, 2);
-            $TAMORTIZACION += $AMORTIZACION;
-            $PENDIENTE -= $AMORTIZACION;
-            $TCUOTAS += $cuota;
+        
+
+        for ($i = 0; $i < $dias; $i++) {
+            
+              
+                 $INTERESES -= $pagointeres; 
+                 $AMORTIZACION -=$pagointeres*2;
+                 $PENDIENTE -= $cuotaDiaria;
 
             $payDate = Carbon::now()->addDay($i);
             
+            if ($i == 0) {
+                $fechaAlta=Carbon::now();
 
-            if ($i == 1) {
                 $tabla = collect([[
                    // 'FECHA' => $payDate->toDateString(),
-                   'FECHA'=>$payDate->toDateString(),
-                    'CUOTA' => $cuota,
-                    'PENDIENTE' => $PENDIENTE
+                   'FECHA'=>$fechaAlta->toDateString(),
+                    'CUOTA' => $cuotaDiaria,
+                    'PENDIENTE' => $prestamo+$porcentajeSum,
+                    'INTERESES'=>$porcentajeSum,
+                    'AMORTIZACION' => $prestamo,
+
                 ]]);
+                $INTERESES += $pagointeres; 
+                $AMORTIZACION +=$pagointeres*2;
+                $PENDIENTE += $cuotaDiaria;
             } else {
                 $tabla->push([
                     'FECHA' => $payDate->toDateString(),
-                    'CUOTA' => $cuota,
-                    'PENDIENTE' => $PENDIENTE
+                    'CUOTA' => $cuotaDiaria,
+                    'PENDIENTE' => $PENDIENTE,
+                    'INTERESES'=>$INTERESES,
+                    'AMORTIZACION' => $AMORTIZACION,
+                       
                 ]);
             }
         }
@@ -140,55 +146,78 @@ trait TraitFrances
         $prestamo = intval($cantidad);
        // $porcentaje = $interes*10;
         $porcentajeSum=$cantidad/2;
-        $dias = 8;
+        $prestamoMasInteres = $prestamo+$porcentajeSum;
         $cuotaDiaria = ($prestamo+$porcentajeSum)/100;
         $prestamoTotal = $prestamo+$porcentajeSum;
-        $cuotaSemanal =$cuotaDiaria*8;
+        $cuotaSemanal =$cuotaDiaria*7;
         $tabla = collect();
         //dd($cuota);
 
         //variables dinámicas
-        $INTERESES = 0;
+        $INTERESES = $porcentajeSum;
         $TINTERESES = 0;
-        $AMORTIZACION = 0;
-        $TAMORTIZACION = 0;
+        $AMORTIZACION = $prestamo;
         $TCUOTAS = 0;
-        $PENDIENTE = $prestamoTotal;
+        $PENDIENTE = $prestamoMasInteres;
+        $pagointeres=$cuotaSemanal/3;
+        $pendienteTemp=false;
 
-        for ($i = 1; $i <= 13; $i++) {
-            
-            if ($i==13) {
-                $cuotaSemanal = $cuotaSemanal/2;
-               
+        for ($i = 0; $i <= 15; $i++) {
+            if ($PENDIENTE<$cuotaSemanal) {
+                $cuotaTemp = $PENDIENTE/3;
+                $INTERESES=$cuotaTemp;
+                $AMORTIZACION =$cuotaTemp*2;
+                $cuotaSemanal=$PENDIENTE;
+               $pendienteTemp=true;
+
+            }else{
+                 $INTERESES -= $pagointeres; 
+                 $AMORTIZACION -=$pagointeres*2;
+                 $PENDIENTE -= $cuotaSemanal;
             }
-            $INTERESES = $cuotaSemanal/3; 
-            $AMORTIZACION =$INTERESES*2;
-            $TINTERESES += $INTERESES;
-            $TAMORTIZACION = round( $PENDIENTE-$cuotaSemanal, 2);
-            //$TAMORTIZACION += $AMORTIZACION;
-            $PENDIENTE -= $cuotaSemanal;
-            $TCUOTAS += $cuotaSemanal;
-
+            
+            // $TINTERESES += $INTERESES;
+            // $TAMORTIZACION = round( $PENDIENTE-$cuotaSemanal, 2);
+            // //$TAMORTIZACION += $AMORTIZACION;
+            // $TCUOTAS += $cuotaSemanal;
+           
             $payDate = Carbon::now()->addDay($i*7);
             
 
-            if ($i == 1) {
+            if ($i == 0) {
+                $fechaAlta=Carbon::now();
                 $tabla = collect([[
                    // 'FECHA' => $payDate->toDateString(),
-                   'FECHA'=>$payDate->toDateString(),
+                   
+                   'FECHA'=>$fechaAlta->toDateString(),
                     'CUOTA' => $cuotaSemanal,
-                    'INTERESES'=>$INTERESES,
-                    'AMORTIZACION' => $AMORTIZACION,
-                    'PENDIENTE' => $prestamoTotal
+                    'INTERESES'=>$porcentajeSum,
+                    'AMORTIZACION' => $prestamo,
+                    'PENDIENTE' => $prestamoMasInteres
                 ]]);
+                $INTERESES += $pagointeres; 
+                 $AMORTIZACION +=$pagointeres*2;
+                 $PENDIENTE += $cuotaSemanal;
             } else {
-                $tabla->push([
-                    'FECHA' => $payDate->toDateString(),
-                    'CUOTA' => $cuotaSemanal,
-                    'INTERESES'=>$INTERESES,
-                    'AMORTIZACION' => $AMORTIZACION,
-                    'PENDIENTE'=>$PENDIENTE
-                ]);
+                if ($pendienteTemp) {
+                    $tabla->push([
+                        'FECHA' => $payDate->toDateString(),
+                        'CUOTA' => $cuotaSemanal,
+                        'INTERESES'=>$INTERESES,
+                        'AMORTIZACION' => $AMORTIZACION,
+                        'PENDIENTE'=>0,
+                    ]);
+                  
+                }else{
+
+                    $tabla->push([
+                        'FECHA' => $payDate->toDateString(),
+                        'CUOTA' => $cuotaSemanal,
+                        'INTERESES'=>$INTERESES,
+                        'AMORTIZACION' => $AMORTIZACION,
+                        'PENDIENTE'=>$PENDIENTE,
+                    ]);
+                }
             }
         }
         // add totales / sumatoria
