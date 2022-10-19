@@ -38,7 +38,7 @@
                                     <td class="text-left">
                                         <div class="media">
                                             <div class="avatar me-2">
-                                                <img alt="avatar" src="{{$customer->img}}" class="rounded" />
+                                                <img alt="avatar" src="/{{$customer->img}}" class="rounded" />
                                             </div>
                                             <div class="media-body">
                                                 <h6 class="mb-0">{{$customer->name}}</h6>
