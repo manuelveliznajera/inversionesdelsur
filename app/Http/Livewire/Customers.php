@@ -143,7 +143,7 @@ class Customers extends Component
             }
 
             $customAvatarName = uniqid() . '.' . $this->avatar->extension(); // 321654.png
-            $this->avatar->storeAs('storage/customers', $customAvatarName);
+            $this->avatar->storeAs('storage/customers/', $customAvatarName);
 
             $customer->avatar = $customAvatarName;
             $customer->save();
