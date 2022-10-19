@@ -7,6 +7,7 @@ use App\Http\Livewire\Loans;
 use App\Http\Livewire\Rates;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\Payments;
+use App\Http\Livewire\Frecuencies;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 // route('customers')
 // url('customers')
+Route::get('frecuencias', Frecuencies::class)->name('frecuencias');
 
 Route::get('customers', Customers::class)->name('customers');
 Route::get('pagos', Payments::class)->name('pagos');

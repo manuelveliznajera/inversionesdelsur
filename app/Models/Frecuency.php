@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Frecuency extends Model
 {
     use HasFactory;
+    protected $table = 'frecuencies';
 
     protected $fillable = ['name', 'days'];
 }
