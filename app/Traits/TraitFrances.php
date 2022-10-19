@@ -107,11 +107,13 @@ trait TraitFrances
             $payDate = Carbon::now()->addDay($i);
             
             if ($i == 0) {
-                $fechaAlta=Carbon::now();
+            $payDate = Carbon::now();
+
+            
 
                 $tabla = collect([[
                    // 'FECHA' => $payDate->toDateString(),
-                   'FECHA'=>$fechaAlta->toDateString(),
+                   'FECHA'=>$payDate->toDateString(),
                     'CUOTA' => $cuotaDiaria,
                     'PENDIENTE' => $prestamo+$porcentajeSum,
                     'INTERESES'=>$porcentajeSum,
