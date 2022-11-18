@@ -123,19 +123,13 @@ class Customers extends Component
 
         if (!empty($this->foto1)) {
             if ($this->selected_id > 0) {
-               // $tmpImg = $customer->foto1;
-                // if ($tmpImg != null && file_exists('storage/customers/' . $tmpImg)) {
-                //     unlink('storage/customers/' . $tmpImg);
-                // }
+           
             }
-          //  dd($this->foto1);
+      
 
             $foto1= uniqid().'.'.$this->foto1->extension(); // 321654.png
              $this->foto1->storeAs('public/customers', $foto1);
-          // $imagePath=public_path('img/customers/').$foto1;
-           
-
-           // dd($guardado);
+         
             
             
             }
@@ -158,7 +152,7 @@ class Customers extends Component
                 'foto2'=>$foto2,
                 'foto3'=>$foto3
               ]);
-              dd($customer);
+             
             
             $customer->save();
         $this->dispatchBrowserEvent('noty', ['msg' => $this->selected_id > 0 ? 'Customer Updated' : 'Cliente Created', 'action' => 'close-modal']);
