@@ -8,6 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>Sistema de Préstamos | INVERSIONES DEL SUR GT </title>
 
+    @stack('styles')
+    @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
+
+
     <script src="{{ asset('assets/layouts/vertical-light-menu/loader.js') }}"></script>
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->

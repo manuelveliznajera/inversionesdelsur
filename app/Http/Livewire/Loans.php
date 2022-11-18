@@ -26,7 +26,7 @@ class Loans extends Component
     use Noty;
 
     //properties
-    public $customer_id = 0, $amount = 0, $rate = 5, $rate_id = 1, $years = 1, $frecuency_id = 0, $method = 'Diario', $plan = [],$plans;
+    public $customer_id = 0, $amount = 0, $rate = 0, $rate_id = 1, $years = 1, $frecuency_id = 0, $method = 'Diario', $plan = [],$plans;
     public $statusComponent = '';
 
 
@@ -41,8 +41,7 @@ class Loans extends Component
             'rates' => Rate::where('state', 'Active')->orderBy('id', 'asc')->get(),
             'frecuencies' => Frecuency::orderBy('name', 'asc')->get(),
             'loans'=>Loan::orderBy('id','asc')->get(),
-        ])
-            ->layout('layouts.theme.app');
+        ]) ->layout('layouts.theme.app');
     }
 
     public function Save()

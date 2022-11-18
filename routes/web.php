@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ImageController;
 use App\Http\Livewire\Customers;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Loans;
@@ -42,5 +43,8 @@ Route::get('loans/lastpdf', [Loans::class, "createPDF"])->name('loans.lastpdf');
 Route::get('/', [AuthenticatedSessionController::class,'create'])->middleware(['guest']);
 
 Route::get('/dashboard', Dashboard::class)->middleware(['auth'])->name('dashboard');
+
+Route::post('/imagenes', [ImageController::class,'store'])->middleware(['auth'])->name('imagenes.store');
+
 
 require __DIR__ . '/auth.php';

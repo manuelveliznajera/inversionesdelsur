@@ -11,7 +11,7 @@ class Customer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'dpi', 'phone', 'address', 'salary', 'age', 'gender', 'avatar', 'referencia'];
+    protected $fillable = ['name', 'dpi', 'phone', 'address',  'foto1','foto2','foto3', 'referencia'];
 
 
     // accesor

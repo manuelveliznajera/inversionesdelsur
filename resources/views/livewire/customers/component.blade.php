@@ -1,3 +1,4 @@
+
 <div>
     <!-- CONTENT AREA -->
     <div class="row">
@@ -22,12 +23,16 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
+                                    <th class="text-center">Id</th>
+                                    <th class="text-center">Nombre</th>
                                     <th class="text-center">Telefono</th>
+                                    <th class="text-center">Dpi</th>
+                                    <th class="text-center">Direccion</th>
+                                    <th class="text-center">Referencia</th>
+                                    <th class="text-center">Foto 1</th>
+                                    <th class="text-center">Foto 2</th>
+                                    <th class="text-center">Foto 3</th>
 
-                                    <th class="text-center">Edad</th>
-                                    <th class="text-center">Genero</th>
-                                    <th class="text-center">Salario</th>
                                     <th class="text-center">Acciones</th>
                                 </tr>
 
@@ -36,27 +41,40 @@
                                 @forelse($customers as $customer)
                                 <tr>
                                     <td class="text-left">
-                                        <div class="media">
-                                            <div class="avatar me-2">
-                                                <img alt="avatar" src="/{{$customer->img}}" class="rounded" />
-                                            </div>
-                                            <div class="media-body">
-                                                <h6 class="mb-0">{{$customer->name}}</h6>
-                                                <span>Dpi:</span>
-                                                <span>{{$customer->dpi}}</span>
-                                            </div>
-                                        </div>
+                                        {{$customer->id}} 
                                     </td>
-                                   
-
+                                    <td class="text-center">{{$customer->name}}</td>
                                     <td class="text-center">{{$customer->phone}}</td>
-                                    <td class="text-center">{{$customer->age}}</td>
+                                    <td class="text-center">{{$customer->dpi}}</td>
+                                    <td class="text-center">{{$customer->address}}</td>
+                                    <td class="text-center">{{$customer->referencia}}</td>
                                     <td class="text-center">
-                                        {{$customer->gender}}
+                                        @if ($customer->foto1)        
+                                        <a target="_blank" href="{{url('storage/customers/'.$customer->foto1)}}">
+                                          <img src="{{asset('/storage/customers/'.$customer->foto1)}}" class="img-fluid" width="64px" alt="">
+                                         </a>
+                                         @else
+                                         no foto
+                                        @endif
                                     </td>
                                     <td class="text-center">
-                                        <span class="badge badge-light-success">${{number_format($customer->salary,2)}}</span>
-                                    </td>
+                                        @if ($customer->foto2)
+                                        <a target="_blank" href="{{url('storage/customers/'.$customer->foto2)}}">
+                                            <img src="{{asset('/storage/customers/'.$customer->foto2)}}" class="img-fluid" width="64px" alt="">
+                                         </a>
+                                         @else
+                                         No foto
+                                        @endif  
+                                     </td>
+                                     <td class="text-center">
+                                        @if ($customer->foto3)
+                                        <a target="_blank" href="{{url('storage/customers/'.$customer->foto3)}}">
+                                            <img src="{{asset('/storage/customers/'.$customer->foto3)}}" class="img-fluid" width="64px" alt="">
+                                         </a>
+                                         @else
+                                         No foto
+                                        @endif  
+                                     </td>
                                     <td class="text-center">
 
                                         <button wire:click="Edit({{ $customer->id }}, false)" class="btn btn-info btn-sm">

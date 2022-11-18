@@ -19,10 +19,9 @@ return new class extends Migration
             $table->string('phone', 12);
             $table->string('dpi', 55);
             $table->string('address');
-            $table->decimal('salary', 10, 2);
-            $table->integer('age');
-            $table->enum('gender', ['Male', 'Female'])->default('Male');
-            $table->string('avatar')->nullable();
+            $table->string('foto1')->nullable();
+            $table->string('foto2')->nullable();
+            $table->string('foto3')->nullable();
             $table->string('referencia', 100);
             $table->timestamps();
         });

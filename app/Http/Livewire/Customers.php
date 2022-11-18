@@ -13,7 +13,7 @@ class Customers extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $name, $dpi, $phone, $address, $salary, $referencia, $age, $gender = 'Select', $avatar, $selected_id = 0;
+    public $name, $dpi, $phone, $address, $salary, $referencia, $age, $gender = 'Select', $foto1, $foto2, $foto3, $selected_id = 0;
     public $componentName = 'CUSTOMERS', $action = 'Listado', $photo, $btnSaveEdit = true;
     public $search;
 
@@ -24,9 +24,6 @@ class Customers extends Component
         'dpi' => 'required|max:15',
         'phone' => 'required|max:10',
         'address' => 'required|min:10|max:255',
-        'salary' => 'required',
-        'age' => 'required',
-        'gender' => 'required|not_in:Select',
         'referencia'=>'required|min:10',
     ];
 
@@ -46,7 +43,7 @@ class Customers extends Component
                 ->orWhere('phone', 'like', "%{$this->search}%")
                 ->paginate(5);
         } else {
-            $customers = Customer::orderBy('name', 'desc')->paginate(5);
+            $customers = Customer::orderBy('id', 'desc')->paginate(10);
         }
 
         return $customers;
@@ -95,12 +92,12 @@ class Customers extends Component
         $this->dpi = $customer->dpi;
         $this->phone = $customer->phone;
         $this->address = $customer->address;
-        $this->salary = $customer->salary;
-        $this->age = $customer->age;
-        $this->gender = $customer->gender;
         $this->referencia = $customer->referencia;
 
-        $this->avatar = null;
+        $this->foto1 = null;
+        $this->foto2 = null;
+        $this->foto3 = null;
+
         $this->action = 'Edit';
         $this->btnSaveEdit = $btnEnable;
         $this->dispatchBrowserEvent('modal-open');
@@ -120,37 +117,52 @@ class Customers extends Component
 
         $validateDate = $this->validate();
 
-        $customer = Customer::updateOrCreate(
-            ['id' => $this->selected_id],
-            [
-                'name' => $this->name,
-                'dpi' => $this->dpi,
-                'phone' => $this->phone,
-                'address' => $this->address,
-                'salary' => $this->salary,
-                'age' => $this->age,
-                'gender' => $this->gender,
-                'referencia'=>$this->referencia,
-            ]
-        );
+        $foto1=null;
+        $foto2=null;
+        $foto3=null;
 
-        if (!empty($this->avatar)) {
+        if (!empty($this->foto1)) {
             if ($this->selected_id > 0) {
-                $tmpImg = $customer->avatar;
-                if ($tmpImg != null && file_exists('storage/customers/' . $tmpImg)) {
-                    unlink('storage/customers/' . $tmpImg);
-                }
+               // $tmpImg = $customer->foto1;
+                // if ($tmpImg != null && file_exists('storage/customers/' . $tmpImg)) {
+                //     unlink('storage/customers/' . $tmpImg);
+                // }
             }
+          //  dd($this->foto1);
 
-            $customAvatarName = uniqid() . '.' . $this->avatar->extension(); // 321654.png
-            $this->avatar->storeAs('storage/customers/', $customAvatarName);
+            $foto1= uniqid().'.'.$this->foto1->extension(); // 321654.png
+             $this->foto1->storeAs('public/customers', $foto1);
+          // $imagePath=public_path('img/customers/').$foto1;
+           
 
-            $customer->avatar = $customAvatarName;
+           // dd($guardado);
+            
+            
+            }
+            if (!empty($this->foto2)) {
+                $foto2 = uniqid() . '.' . $this->foto2->extension(); // 321654.png
+                $this->foto2->storeAs('public/customers', $foto2);  
+                
+            }if (!empty($this->foto3)) {
+                $foto3 = uniqid() . '.' . $this->foto3->extension(); // 321654.png
+                $this->foto3->storeAs('public/customers', $foto3);     
+            }
+            //dd($customer);
+            $customer = Customer::create([
+                'name'=>$validateDate['name'],
+                'address'=>$validateDate['address'],
+                'phone'=>$validateDate['phone'],
+                'dpi'=>$validateDate['dpi'],
+                'referencia'=>$validateDate['referencia'],
+                'foto1'=>$foto1,
+                'foto2'=>$foto2,
+                'foto3'=>$foto3
+              ]);
+              dd($customer);
+            
             $customer->save();
-        }
-
         $this->dispatchBrowserEvent('noty', ['msg' => $this->selected_id > 0 ? 'Customer Updated' : 'Cliente Created', 'action' => 'close-modal']);
-        $this->reset('name', 'address', 'salary', 'avatar', 'age', 'gender', 'selected_id', 'phone','dpi', 'referencia');
+        $this->reset('name', 'address',  'foto1', 'foto2','foto3',  'selected_id', 'phone','dpi', 'referencia');
     }
 
 
