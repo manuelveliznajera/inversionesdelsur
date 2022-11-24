@@ -64,7 +64,7 @@
                                     @endif
 
                                     <td class="text-center">
-                                        <a class="btn btn-warning" href="{{ route('pagos',['id'=>$item->id,'name'=>$item->name])}}"> Abonar</a>
+                                        {{-- <a class="btn btn-warning" href="{{ route('pagos',['id'=>$item->id,'name'=>$item->name])}}"> Abonar</a> --}}
                                         {{-- <a class="btn btn-success" href="{{ route('pagos',['id'=>$item->id,'name'=>$item->name])}}"> Cancelar</a> --}}
 
                                         <button wire:click="Pago({{$item->number}}, {{$item->loan_id}})" class="btn btn-success btn-sm">

@@ -13,10 +13,10 @@
                         </div>
 
                         <div class="col-sm-12 col-md-2 d-flex justify-content-end p-3">
-                            <div class="btn-group" role="group">
-                                <button wire:click.prevent="Save" class="btn btn-sm btn-dark">SAVE LOAN </button>
-                                <button wire:click="previewPDF" class="btn btn-sm btn-primary">PREVIEW PDF </button>
-                            </div>
+                            {{-- <div class="btn-group" role="group">
+                                <button wire:click.prevent="Save" class="btn btn-sm btn-dark">Guardar Prestamo </button>
+                                
+                            </div> --}}
                         </div>
 
                     </div>
@@ -24,7 +24,7 @@
                 <div class="widget-content widget-content-area">
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="{{route('customers')}}"class="btn btn-primary">Agregar Cliente</a>
+                            <a href="{{route('customers')}}"class="btn btn-dark">Agregar Cliente</a>
                         </div>
                     </div>
                     <div class="row mt-4">
@@ -73,6 +73,12 @@
                                 @endforeach --}}
                             </select>
                         </div> 
+                        <div class="col-sm-12 col-md-2">
+                            <div class="btn-group" role="group">
+                                <button wire:click.prevent="Save" class="btn btn-sm btn-info">Guardar Prestamo </button>
+                                
+                            </div>
+                        </div>
                         {{-- <div class="col-sm-12 col-md-2">
                             METODO DE PAGO
                             <select wire:model="method" class="form-select form-select-sm">
@@ -98,8 +104,9 @@
 
                             </thead>
                             <tbody>
+                                {{count($loans)}}
                                 @forelse($loans as $key => $item)
-                                @if($key > 0)
+                                {{-- @if($key > 0) --}}
                                 <tr>
                                     <td class="text-center">{{ $key}}</td>
                                     <td class="text-center">{{ $item->customer->name}}</td>
@@ -112,7 +119,7 @@
                                     </td>
 
                                 </tr>
-                                @endif
+                                {{-- @endif --}}
                                 @empty
                                 <tr>
                                     <td>NO RESULTS</td>

@@ -7,12 +7,13 @@ use App\Models\Customer;
 use App\Models\Frecuency;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 
 class Customers extends Component
 {
     use WithFileUploads;
     use WithPagination;
-
+    
     public $name, $dpi, $phone, $address, $salary, $referencia, $age, $gender = 'Select', $foto1, $foto2, $foto3, $selected_id = 0;
     public $componentName = 'CUSTOMERS', $action = 'Listado', $photo, $btnSaveEdit = true;
     public $search;
@@ -126,16 +127,24 @@ class Customers extends Component
            
             }
       
+            
 
-            $foto1= uniqid().'.'.$this->foto1->extension(); // 321654.png
-             $this->foto1->storeAs('public/customers', $foto1);
+            $foto1n = Str::random(10).'.'.$this->foto1->extension(); // 321654.png
+            // $this->foto1->storeAs('public/customers', $foto1);
+           
+            $base=base_path().'/img';
+            $this->foto1->storeAs($base, $foto1n); 
+            // move_uploaded_file($this->foto1,'img/'.$foto1);
+            //  $this->foto1->storeAs('uploads', $foto1);
+
          
             
             
             }
             if (!empty($this->foto2)) {
                 $foto2 = uniqid() . '.' . $this->foto2->extension(); // 321654.png
-                $this->foto2->storeAs('public/customers', $foto2);  
+                $base=base_path().'/public/img/';
+                $this->foto2->storeAs($base, $foto2);  
                 
             }if (!empty($this->foto3)) {
                 $foto3 = uniqid() . '.' . $this->foto3->extension(); // 321654.png

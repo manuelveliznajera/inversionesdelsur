@@ -51,7 +51,7 @@
                                     <td class="text-center">
                                         @if ($customer->foto1)        
                                         <a target="_blank" href="{{url('storage/customers/'.$customer->foto1)}}">
-                                          <img src="{{asset('/storage/customers/'.$customer->foto1)}}" class="img-fluid" width="64px" alt="">
+                                          <img src="/storage/customers/'.{{$customer->foto1}}" class="img-fluid" width="64px" alt="">
                                          </a>
                                          @else
                                          no foto
@@ -60,7 +60,7 @@
                                     <td class="text-center">
                                         @if ($customer->foto2)
                                         <a target="_blank" href="{{url('storage/customers/'.$customer->foto2)}}">
-                                            <img src="{{asset('/storage/customers/'.$customer->foto2)}}" class="img-fluid" width="64px" alt="">
+                                            <img src="/public/customers/'.{{$customer->foto2}}" class="img-fluid" width="64px" alt="">
                                          </a>
                                          @else
                                          No foto

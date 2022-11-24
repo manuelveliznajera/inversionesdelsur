@@ -40,7 +40,7 @@ class Loans extends Component
             'customers' => Customer::orderBy('name', 'asc')->get(),
             'rates' => Rate::where('state', 'Active')->orderBy('id', 'asc')->get(),
             'frecuencies' => Frecuency::orderBy('name', 'asc')->get(),
-            'loans'=>Loan::orderBy('id','asc')->get(),
+            'loans'=>Loan::all(),
         ]) ->layout('layouts.theme.app');
     }
 
@@ -90,6 +90,7 @@ class Loans extends Component
                if ($key > 0) {
                     Plan::create([
                         'loan_id' => $loan->id,
+                        'diapago' => $pay['DIAPAGO'],
                         'date' => $pay['FECHA'],
                         'number' => $key,
                         'payment' => $pay['CUOTA'],

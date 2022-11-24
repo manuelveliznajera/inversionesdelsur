@@ -105,7 +105,7 @@ trait TraitFrances
                  $PENDIENTE -= $cuotaDiaria;
 
             $payDate = Carbon::now()->addDay($i);
-            
+            $pagoDia=Carbon::parse($payDate);
             if ($i == 0) {
             $payDate = Carbon::now();
 
@@ -114,6 +114,7 @@ trait TraitFrances
                 $tabla = collect([[
                    // 'FECHA' => $payDate->toDateString(),
                    'FECHA'=>$payDate->toDateString(),
+                   'DIAPAGO'=>$pagoDia->dayName,
                     'CUOTA' => $cuotaDiaria,
                     'PENDIENTE' => $prestamo+$porcentajeSum,
                     'INTERESES'=>$porcentajeSum,
@@ -126,6 +127,7 @@ trait TraitFrances
             } else {
                 $tabla->push([
                     'FECHA' => $payDate->toDateString(),
+                   'DIAPAGO'=>$pagoDia->dayName,
                     'CUOTA' => $cuotaDiaria,
                     'PENDIENTE' => $PENDIENTE,
                     'INTERESES'=>$INTERESES,

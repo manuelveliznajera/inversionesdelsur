@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('loan_id')->constrained();
+            $table->string('diapago');
             $table->date('date');
             $table->integer('number');
             $table->decimal('payment', 10, 2);

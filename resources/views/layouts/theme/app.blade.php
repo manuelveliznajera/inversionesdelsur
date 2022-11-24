@@ -10,7 +10,7 @@
 
     @stack('styles')
     @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
+ 
 
 
     <script src="{{ asset('assets/layouts/vertical-light-menu/loader.js') }}"></script>

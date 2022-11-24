@@ -9,6 +9,7 @@ use App\Http\Livewire\Rates;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\Payments;
 use App\Http\Livewire\Frecuencies;
+use App\Http\Livewire\Reports\Report;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,8 @@ Route::get('loans/lastpdf', [Loans::class, "createPDF"])->name('loans.lastpdf');
 Route::get('/', [AuthenticatedSessionController::class,'create'])->middleware(['guest']);
 
 Route::get('/dashboard', Dashboard::class)->middleware(['auth'])->name('dashboard');
+Route::get('/reportes', Report::class)->middleware(['auth'])->name('reportes');
+
 
 Route::post('/imagenes', [ImageController::class,'store'])->middleware(['auth'])->name('imagenes.store');
 
