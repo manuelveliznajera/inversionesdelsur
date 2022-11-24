@@ -186,6 +186,7 @@ trait TraitFrances
             // $TCUOTAS += $cuotaSemanal;
            
             $payDate = Carbon::now()->addDay($i*7);
+            $pagoDia=Carbon::parse($payDate);
             
 
             if ($i == 0) {
@@ -194,6 +195,7 @@ trait TraitFrances
                    // 'FECHA' => $payDate->toDateString(),
                    
                    'FECHA'=>$fechaAlta->toDateString(),
+                   'DIAPAGO'=>$pagoDia->dayName,
                     'CUOTA' => $cuotaSemanal,
                     'INTERESES'=>$porcentajeSum,
                     'AMORTIZACION' => $prestamo,
@@ -206,6 +208,7 @@ trait TraitFrances
                 if ($pendienteTemp) {
                     $tabla->push([
                         'FECHA' => $payDate->toDateString(),
+                        'DIAPAGO'=>$pagoDia->dayName,
                         'CUOTA' => $cuotaSemanal,
                         'INTERESES'=>$INTERESES,
                         'AMORTIZACION' => $AMORTIZACION,
@@ -216,6 +219,7 @@ trait TraitFrances
 
                     $tabla->push([
                         'FECHA' => $payDate->toDateString(),
+                        'DIAPAGO'=>$pagoDia->dayName,
                         'CUOTA' => $cuotaSemanal,
                         'INTERESES'=>$INTERESES,
                         'AMORTIZACION' => $AMORTIZACION,

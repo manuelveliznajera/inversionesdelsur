@@ -24,7 +24,7 @@
                 <div class="widget-content widget-content-area">
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="{{route('customers')}}"class="btn btn-dark">Agregar Cliente</a>
+                            <a href="{{route('clientes')}}"class="btn btn-dark">Agregar Cliente</a>
                         </div>
                     </div>
                     <div class="row mt-4">
@@ -60,17 +60,17 @@
                             TIPO DE PAGO
                             <select wire:model="frecuency_id" class="form-select form-select-sm">
                                 <option value="0" selected disabled>SELECCIONE</option>
-                                <option value="1">Diario</option>
+                                {{-- <option value="1">Diario</option>
                                 <option value="2">Semanal</option>
                                 <option value="3">Quincenal</option>
-                                <option value="4">Mensual</option>
+                                <option value="4">Mensual</option> --}}
 
 
 
 
-                                {{-- @foreach($frecuencies as $frecuency)
+                                @foreach($frecuencies as $frecuency)
                                 <option value="{{ $frecuency->id }}">{{ $frecuency->name }}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                         </div> 
                         <div class="col-sm-12 col-md-2">
@@ -104,7 +104,7 @@
 
                             </thead>
                             <tbody>
-                                {{count($loans)}}
+                                
                                 @forelse($loans as $key => $item)
                                 {{-- @if($key > 0) --}}
                                 <tr>

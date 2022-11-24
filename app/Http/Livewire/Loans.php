@@ -73,6 +73,14 @@ class Loans extends Component
         DB::beginTransaction();
 
         try {
+            $prestamo=Loan::where('customer_id',$this->customer_id)->first();
+            $pendiente=Plan::where('loan_id',$prestamo->id)
+            ->where('proceso','pendiente')->get();
+            if ($pendiente!=null) {
+            DB::rollBack();
+                $this->dispatchBrowserEvent('noty', ['msg' => 'Cliente tiene credito pendiente de Cancelar!']);  
+                return;
+            }
             $loan = Loan::create([
                 'amount' => $this->amount,
                 'frecuency_id' => $this->frecuency_id,

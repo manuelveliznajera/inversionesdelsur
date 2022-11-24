@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 // url('customers')
 Route::get('frecuencias', Frecuencies::class)->name('frecuencias');
 
-Route::get('customers', Customers::class)->name('customers');
+Route::get('clientes', Customers::class)->name('clientes');
 Route::get('pagos', Payments::class)->name('pagos');
 
 Route::get('rates', Rates::class)->name('rates');

@@ -16,7 +16,7 @@
                 <div class="widget-content widget-content-area">
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="{{route('customers')}}"class="btn btn-primary">Imprimir</a>
+                            <a href="{{route('clientes')}}"class="btn btn-primary">Imprimir</a>
                         </div>
                     </div>
                     <div class="row mt-4">
@@ -57,7 +57,7 @@
                                     <td class="text-center">{{ $item->balance}}</td>
                                     
                                     <td class="text-center">
-                                        <a class="btn btn-success" href="{{ route('pagos',['id'=>$item->id,'name'=>$item->name])}}"> ver</a>
+                                        <a class="btn btn-success" href="{{ route('pagos',['id'=>$item->loan_id,'name'=>$item->name])}}"> ver</a>
                                     </td>
 
                                 </tr>

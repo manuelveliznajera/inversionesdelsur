@@ -1,4 +1,5 @@
 <script>
+    console.log("customers")
     function fireModal(action = 1) {
 
         if (action == 1) {
@@ -22,23 +23,26 @@
     })
 
 
-    /*
-    function Confirm(CustomerId) {
+    
+    function Confirmar(CustomerId) {
+        
         Swal.fire({
             title: 'Info',
-            text: "¿CONFIRMAS ELIMINAR EL REGISTRO?",
+            text: "¿CONFIRMAS ELIMINAR EL REGISTRO ?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Aceptar'
         }).then((result) => {
+          //  window.livewire.emit('Destroy', CustomerId) // 1,2 ,3
+                
             if (result.isConfirmed) {
-                /// Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
-                //window.livewire.emit('Destroy', CustomerId) // 1,2 ,3
                 @this.Destroy(CustomerId)
+                // Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
+              
             }
         })
     }
-    */
+
 </script>

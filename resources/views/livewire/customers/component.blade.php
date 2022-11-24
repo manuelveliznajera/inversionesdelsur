@@ -7,7 +7,7 @@
                 <div class="widget-header">
                     <div class="row">
                         <div class="col-sm-12 col-md-10">
-                            <h4><b> CLIENTES </b>
+                            <h4><b> CLIENTES  </b>
                             </h4>
                         </div>
 
@@ -85,7 +85,7 @@
                                             <i class="far fa-edit fa-lg "></i>
                                         </button>
 
-                                        <button onclick="Confirm({{ $customer->id }})" class="btn btn-danger btn-sm">
+                                        <button onclick="Confirmar({{ $customer->id }})" class="btn btn-danger btn-sm">
                                             <i class="far fa-trash-alt fa-lg "></i>
                                         </button>
 

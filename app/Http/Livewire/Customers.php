@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Frecuency;
+use App\Models\Loan;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
@@ -15,7 +16,7 @@ class Customers extends Component
     use WithPagination;
     
     public $name, $dpi, $phone, $address, $salary, $referencia, $age, $gender = 'Select', $foto1, $foto2, $foto3, $selected_id = 0;
-    public $componentName = 'CUSTOMERS', $action = 'Listado', $photo, $btnSaveEdit = true;
+    public $componentName = 'CLIENTES', $action = 'Listado', $photo, $btnSaveEdit = true;
     public $search;
 
     protected $paginationTheme = 'bootstrap';
@@ -82,7 +83,7 @@ class Customers extends Component
     public function Add()
     {
         $this->resetValidation();
-        $this->action = 'Create';
+        $this->action = 'CREAR NUEVO';
         $this->dispatchBrowserEvent('modal-open');
     }
 
@@ -99,7 +100,7 @@ class Customers extends Component
         $this->foto2 = null;
         $this->foto3 = null;
 
-        $this->action = 'Edit';
+        $this->action = 'EDITAR CLIENTE';
         $this->btnSaveEdit = $btnEnable;
         $this->dispatchBrowserEvent('modal-open');
     }
@@ -151,7 +152,9 @@ class Customers extends Component
                 $this->foto3->storeAs('public/customers', $foto3);     
             }
             //dd($customer);
-            $customer = Customer::create([
+            $customer = Customer::updateOrCreate(
+                ['id' => $this->selected_id],
+                [
                 'name'=>$validateDate['name'],
                 'address'=>$validateDate['address'],
                 'phone'=>$validateDate['phone'],
@@ -164,7 +167,7 @@ class Customers extends Component
              
             
             $customer->save();
-        $this->dispatchBrowserEvent('noty', ['msg' => $this->selected_id > 0 ? 'Customer Updated' : 'Cliente Created', 'action' => 'close-modal']);
+        $this->dispatchBrowserEvent('noty', ['msg' => $this->selected_id > 0 ? 'Cliente Actualizado' : 'Cliente Creado', 'action' => 'close-modal']);
         $this->reset('name', 'address',  'foto1', 'foto2','foto3',  'selected_id', 'phone','dpi', 'referencia');
     }
 
@@ -185,8 +188,15 @@ class Customers extends Component
 
     public function Destroy(Customer $customer)
     {
-        //dd($customer);
+      //  dd($customer->id);
+        $customerIn=Loan::where('customer_id',$customer->id)->first();
+      //  $customer=Loan::where('customer_id')
+      if ($customerIn!=null) {
+        $this->dispatchBrowserEvent('noty', ['msg' => 'Cliente  No se puede Eliminar, tiene prestamos asignado']);
+          return;
+      }
+     // dd($customerIn);
         $customer->delete();
-        $this->dispatchBrowserEvent('noty', ['msg' => 'Customer Deleted']);
+        $this->dispatchBrowserEvent('noty', ['msg' => 'Cliente  Eliminado']);
     }
 }

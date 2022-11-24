@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-sm-12 col-md-9">
                     <label class="form-label">Dirección*</label>
-                    <textarea wire:model="address" class="form-control form-control-sm" cols="30" rows="2" placeholder="1234 Main St"></textarea>
+                    <textarea wire:model="address" class="form-control form-control-sm" cols="30" rows="2" placeholder="Aldea Centro, Cuilapa Santa Rosa"></textarea>
                     @error('address') <span class="text-warning">{{ $message }}</span> @enderror
                 </div>
                 <div class="col-sm-12 col-md-9">
