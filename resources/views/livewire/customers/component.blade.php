@@ -50,8 +50,8 @@
                                     <td class="text-center">{{$customer->referencia}}</td>
                                     <td class="text-center">
                                         @if ($customer->foto1)        
-                                        <a target="_blank" href="{{url('storage/customers/'.$customer->foto1)}}">
-                                          <img src="/storage/customers/'.{{$customer->foto1}}" class="img-fluid" width="64px" alt="">
+                                        <a target="_blank" href="{{asset('storage/customers/'.$customer->foto1)}}">
+                                          <img src="{{asset('storage/customers/'.$customer->foto1)}}" class="img-fluid" width="64px" alt="">
                                          </a>
                                          @else
                                          no foto

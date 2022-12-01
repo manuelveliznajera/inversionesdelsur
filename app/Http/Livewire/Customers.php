@@ -17,7 +17,7 @@ class Customers extends Component
     
     public $name, $dpi, $phone, $address, $salary, $referencia, $age, $gender = 'Select', $foto1, $foto2, $foto3, $selected_id = 0;
     public $componentName = 'CLIENTES', $action = 'Listado', $photo, $btnSaveEdit = true;
-    public $search;
+    public $search, $foto1n='';
 
     protected $paginationTheme = 'bootstrap';
 
@@ -95,11 +95,6 @@ class Customers extends Component
         $this->phone = $customer->phone;
         $this->address = $customer->address;
         $this->referencia = $customer->referencia;
-
-        $this->foto1 = null;
-        $this->foto2 = null;
-        $this->foto3 = null;
-
         $this->action = 'EDITAR CLIENTE';
         $this->btnSaveEdit = $btnEnable;
         $this->dispatchBrowserEvent('modal-open');
@@ -119,7 +114,6 @@ class Customers extends Component
 
         $validateDate = $this->validate();
 
-        $foto1=null;
         $foto2=null;
         $foto3=null;
 
@@ -127,14 +121,12 @@ class Customers extends Component
             if ($this->selected_id > 0) {
            
             }
-      
-            
-
-            $foto1n = Str::random(10).'.'.$this->foto1->extension(); // 321654.png
-            // $this->foto1->storeAs('public/customers', $foto1);
-           
+           // dd('ingreso');
+            $this->foto1n = Str::random(10).'.'.$this->foto1->extension(); // 321654.png
+            // $this->foto1->storeAs('public/customers', $foto1);          
             $base=base_path().'/img';
-            $this->foto1->storeAs($base, $foto1n); 
+            $guardado=$this->foto1->storeAs('public/customers', $this->foto1n); 
+            // dd($guardado);
             // move_uploaded_file($this->foto1,'img/'.$foto1);
             //  $this->foto1->storeAs('uploads', $foto1);
 
@@ -160,11 +152,11 @@ class Customers extends Component
                 'phone'=>$validateDate['phone'],
                 'dpi'=>$validateDate['dpi'],
                 'referencia'=>$validateDate['referencia'],
-                'foto1'=>$foto1,
+                'foto1'=>$this->foto1n,
                 'foto2'=>$foto2,
                 'foto3'=>$foto3
               ]);
-             
+             //dd($customer);
             
             $customer->save();
         $this->dispatchBrowserEvent('noty', ['msg' => $this->selected_id > 0 ? 'Cliente Actualizado' : 'Cliente Creado', 'action' => 'close-modal']);
