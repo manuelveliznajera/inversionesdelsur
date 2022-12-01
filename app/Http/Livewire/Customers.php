@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+
 use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Frecuency;
@@ -9,7 +10,7 @@ use App\Models\Loan;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
-
+use Image;
 class Customers extends Component
 {
     use WithFileUploads;
@@ -124,11 +125,12 @@ class Customers extends Component
            // dd('ingreso');
             $this->foto1n = Str::random(10).'.'.$this->foto1->extension(); // 321654.png
             // $this->foto1->storeAs('public/customers', $foto1);          
-            $base=base_path().'/img';
-            $guardado=$this->foto1->storeAs('public/customers', $this->foto1n); 
-            // dd($guardado);
-            // move_uploaded_file($this->foto1,'img/'.$foto1);
-            //  $this->foto1->storeAs('uploads', $foto1);
+            $destinationPath = public_path('/img/uploads');
+            $image=Image::make($this->foto1->getRealPath());
+            $image->save($destinationPath.'/'.$this->foto1n);
+          //  $guardado=$this->foto1->storeAs('public/customers', $this->foto1n); 
+        //  $fotoguarda= $this->foto1->save($destinationPath, $this->foto1);
+        //  dd($image);
 
          
             
