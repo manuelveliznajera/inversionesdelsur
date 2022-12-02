@@ -145,7 +145,7 @@ class Customers extends Component
                 $foto3 = uniqid() . '.' . $this->foto3->extension(); // 321654.png
                 $this->foto3->storeAs('public/customers', $foto3);     
             }
-            //dd($customer);
+            //dd($this->foto1n);
             $customer = Customer::updateOrCreate(
                 ['id' => $this->selected_id],
                 [
@@ -161,7 +161,7 @@ class Customers extends Component
              //dd($customer);
             
             $customer->save();
-        $this->dispatchBrowserEvent('noty', ['msg' => $this->selected_id > 0 ? 'Cliente Actualizado' : 'Cliente Creado', 'action' => 'close-modal']);
+        $this->dispatchBrowserEvent('noty', ['msg' => $this->selected_id > 0 ? 'Cliente Actualizado' : 'Cliente Creado'.$this->foto1n, 'action' => 'close-modal']);
         $this->reset('name', 'address',  'foto1', 'foto2','foto3',  'selected_id', 'phone','dpi', 'referencia');
     }
 
