@@ -16,7 +16,9 @@
             </div>
 
             <div class="">
-                <a href="#" class="nav-link "> {{Auth()->user()->name}} </a>
+                <a href="#" class="nav-link "> 
+                    Manuel Prueba
+                </a>
                 <form action="{{route('logout')}}" method="post">
                 @csrf
                     <button type="submit" class="btn btn-danger text-white "> Cerrar sesion </button>
