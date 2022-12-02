@@ -8,6 +8,9 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-10">
                             <h4><b> CLIENTES  </b>
+                                {{ <?php echo __FILE__; ?>}}
+                                {{ $foto1}}
+
                             </h4>
                         </div>
 
